@@ -2,6 +2,14 @@
 # "/" shows the public home page; /privacy and /terms are static pages; everything else is the SPA.
 DirectoryIndex home.html
 
+# Never cache the service worker or HTML (incl. at Cloudflare), so new deploys take effect immediately.
+# Hashed files in /assets can keep their normal long cache.
+<IfModule mod_headers.c>
+  <FilesMatch "^(sw\.js|registerSW\.js|workbox-.*\.js|manifest\.webmanifest|.*\.html)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
 RewriteEngine On
 RewriteBase /
 RewriteRule ^privacy/?$ privacy.html [L]

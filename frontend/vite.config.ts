@@ -26,6 +26,8 @@ export default defineConfig({
         ],
       },
       workbox: {
+        // "/" is the public home page (matches DirectoryIndex in public/.htaccess), not the SPA shell.
+        directoryIndex: 'home.html',
         // Static public pages (home, privacy, terms) must load from the server, not the SPA shell.
         navigateFallbackDenylist: [/^\/$/, /^\/(privacy|terms)\/?$/, /\.html$/, /^\/(auth|connected-accounts|files|folders|invites|provider-configs|public|storage|uploads)(\/|$)/],
         globPatterns: ['**/*.{js,css,html,svg,ico,png,webp,woff2}'],
