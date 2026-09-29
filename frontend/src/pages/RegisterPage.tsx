@@ -14,9 +14,10 @@ const recaptchaSiteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY?.trim()
 declare global {
   interface Window {
     grecaptcha?: {
-      render: (element: HTMLElement, options: { sitekey: string; callback: (token: string) => void; 'expired-callback': () => void }) => number
+      render?: (element: HTMLElement, options: { sitekey: string; callback: (token: string) => void; 'expired-callback': () => void }) => number
       reset: (widgetId?: number) => void
     }
+    onRecaptchaLoad?: () => void
   }
 }
 
@@ -36,7 +37,7 @@ export function RegisterPage() {
     if (!recaptchaSiteKey) return
     const scriptId = 'google-recaptcha-script'
     const renderCaptcha = () => {
-      if (!recaptchaRef.current || !window.grecaptcha || recaptchaWidgetId.current !== null) return
+      if (!recaptchaRef.current || !window.grecaptcha?.render || recaptchaWidgetId.current !== null) return
       recaptchaWidgetId.current = window.grecaptcha.render(recaptchaRef.current, {
         sitekey: recaptchaSiteKey,
         callback: setCaptchaToken,
@@ -44,16 +45,20 @@ export function RegisterPage() {
       })
     }
 
+    // Google calls onRecaptchaLoad once grecaptcha.render is ready; script onload fires too early.
+    window.onRecaptchaLoad = renderCaptcha
     if (!document.getElementById(scriptId)) {
       const script = document.createElement('script')
       script.id = scriptId
-      script.src = 'https://www.google.com/recaptcha/api.js?render=explicit'
+      script.src = 'https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit'
       script.async = true
       script.defer = true
-      script.onload = renderCaptcha
       document.body.appendChild(script)
     } else {
       renderCaptcha()
+    }
+    return () => {
+      window.onRecaptchaLoad = undefined
     }
   }, [])
 
@@ -111,6 +116,7 @@ export function RegisterPage() {
           <Button variant="outline" disabled={googleLoading} onClick={continueWithGoogle}><GoogleLogo />{googleLoading ? 'Redirecting...' : 'Continue with Google and connect Drive'}</Button>
         </div>
         <p className="mt-5 text-center text-sm text-slate-500">Already registered? <Link className="font-bold text-blue-600" to="/login">Login</Link></p>
+        <p className="mt-3 text-center text-xs text-slate-400"><a className="hover:text-slate-600" href="/privacy">Privacy Policy</a> · <a className="hover:text-slate-600" href="/terms">Terms of Service</a></p>
       </Card>
     </main>
   )

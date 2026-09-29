@@ -1,0 +1,33 @@
+/* Styles for the static, no-JS pages (home.html, privacy.html, terms.html). */
+:root { color-scheme: light; --blue: #2563eb; --ink: #0f172a; --muted: #475569; --line: #e2e8f0; --bg: #f8fafc; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Manrope, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.65; }
+a { color: var(--blue); }
+.wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+header { background: #fff; border-bottom: 1px solid var(--line); }
+header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 14px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; color: var(--ink); text-decoration: none; }
+.brand img { width: 36px; height: 36px; }
+nav { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn { display: inline-block; padding: 9px 16px; border-radius: 12px; font-weight: 700; text-decoration: none; border: 1px solid var(--line); color: var(--ink); background: #fff; }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+main { padding-block: 40px; }
+.hero h1 { font-size: clamp(28px, 5vw, 42px); line-height: 1.15; margin: 0 0 14px; }
+.hero p { font-size: 18px; color: var(--muted); margin: 0 0 22px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 32px; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; }
+.card h3 { margin: 0 0 6px; font-size: 16px; }
+.card p { margin: 0; color: var(--muted); font-size: 14px; }
+.doc { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 28px clamp(18px, 4vw, 40px); }
+.doc h1 { margin: 0; font-size: 30px; }
+.doc .meta { color: var(--muted); margin: 4px 0 20px; font-size: 14px; }
+h2 { font-size: 20px; margin: 30px 0 8px; }
+p, li { color: var(--muted); font-size: 15px; }
+.table { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; vertical-align: top; padding: 10px; border-bottom: 1px solid var(--line); color: var(--muted); }
+th { color: var(--ink); background: var(--bg); }
+code { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 1px 5px; font-size: 13px; word-break: break-all; }
+footer { border-top: 1px solid var(--line); background: #fff; }
+footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-block: 18px; font-size: 14px; color: var(--muted); }
+footer nav a { color: var(--muted); }

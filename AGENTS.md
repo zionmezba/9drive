@@ -283,3 +283,11 @@ Manual smoke test:
 - Do not change auth/token storage behavior without explicit reason.
 - Do not change Google OAuth scopes or redirect behavior without checking README and env requirements.
 - Do not change upload behavior to write files to disk.
+
+<!-- lean-ctx-compression -->
+OUTPUT STYLE: concise
+- Bullet points over paragraphs
+- Skip filler words and hedging ("I think", "probably", "it seems")
+- 1-sentence explanations max, then code/action
+- No repeating what the user said
+<!-- /lean-ctx-compression -->

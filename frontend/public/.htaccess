@@ -1,0 +1,11 @@
+# Apache/LiteSpeed (cPanel) routing for the built frontend.
+# "/" shows the public home page; /privacy and /terms are static pages; everything else is the SPA.
+DirectoryIndex home.html
+
+RewriteEngine On
+RewriteBase /
+RewriteRule ^privacy/?$ privacy.html [L]
+RewriteRule ^terms/?$ terms.html [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
